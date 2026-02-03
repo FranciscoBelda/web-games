@@ -1,0 +1,156 @@
+@if (loaded){
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="text-primary-emphasis text-center">FORM</h2>
+      <form [formGroup]="formGame" (submit)="onSubmit()">
+        <div class="form-floating mb-3">
+          <input type="text"
+                 [class.is-invalid]="title.invalid &&
+                 (title.touched || title.dirty)"
+                 [class.is-valid]="title.valid"
+                 class="form-control"
+                 formControlName="title"
+                 id="title"
+                 placeholder="Title">
+          <label for="title">Title</label>
+          @if (title.invalid && (title.touched || title.dirty)){
+
+              @if (title.errors['required']){
+                <!-- <p class="small text-danger">Title is required</p> -->
+                <div class="invalid-feedback is-invalid">Title is required</div>
+              }
+              @if (title.errors['forbiddenWord']){
+                <!-- <p class="small text-danger">Title is required</p> -->
+                <div class="invalid-feedback is-invalid">The word 'hola' is not allowed</div>
+              }
+              <!--@if (title.errors['minlength']){
+                <p class="small text-danger">Title minimum characters are 2</p>
+              }
+              @if (title.errors['maxlength']){
+                <p class="small text-danger">Title maximum characters are 255</p>
+              }
+              @if (title.errors['notOnlyWhiteSpace']){
+                <p class="small text-danger">Title can't be only whitespaces</p>
+              }-->
+
+          }
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text"
+                 class="form-control"
+                 formControlName="subtitle"
+                 id="subtitle"
+                 placeholder="Subtitle">
+          <label for="subtitle">Subtitle</label>
+          @if (subtitle.invalid && (subtitle.touched || subtitle.dirty)){
+            <div class="alert alert-danger">
+              @if (subtitle.errors['required']){
+                <small class="text-danger">Subtitle is required</small>
+              }
+              @if (subtitle.errors['minlength']){
+                <small class="text-danger">Subtitle minimum characters are 2</small>
+              }
+              @if (subtitle.errors['maxlength']){
+                <small class="text-danger">Subtitle maximum characters are 255</small>
+              }
+            </div>
+          }
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text"
+                 class="form-control"
+                 formControlName="image"
+                 id="image"
+                 placeholder="image">
+          <label for="image">image</label>
+          @if (image.invalid && (image.touched || image.dirty)){
+            <div class="alert alert-danger">
+              @if (image.errors['required']){
+                <small class="text-danger">Image is required</small>
+              }
+              @if (image.errors['minlength']){
+                <small class="text-danger">Image minimum characters are 2</small>
+              }
+              @if (image.errors['maxlength']){
+                <small class="text-danger">Image maximum characters are 255</small>
+              }
+            </div>
+          }
+        </div>
+        <div class="form-floating mb-3">
+          <textarea type="text"
+                 class="form-control"
+                 formControlName="description"
+                 id="description"
+                    placeholder="Description"></textarea>
+          <label for="description">Description</label>
+          @if (description.invalid && (description.touched || description.dirty)){
+            <div class="alert alert-danger">
+              @if (description.errors['required']){
+                <small class="text-danger">Description is required</small>
+              }
+              @if (description.errors['minlength']){
+                <small class="text-danger">Description minimum characters are 2</small>
+              }
+              @if (description.errors['maxlength']){
+                <small class="text-danger">Description maximum characters are 255</small>
+              }
+            </div>
+          }
+        </div>
+        <div class="form-check form-switch">
+          <input class="form-check-input"
+                 formControlName="favorite"
+                 type="checkbox" id="favorite">
+          <label class="form-check-label" for="favorite">Favorite</label>
+        </div>
+
+        <div class="text-center">
+          <button class="btn btn-primary" type="submit">SUBMIT</button>
+        </div>
+
+      </form>
+
+
+    </div>
+    <div class="col-md-3 offset-md-3">
+      <h2 class="text-primary-emphasis text-center">PREVIEW</h2>
+      <div class="card shadow-sm flex-grow-1">
+          <img [src]="image.value || '/images/image-not-found.jpg'" [alt]="title.value"
+               class="card-img-top">
+          <div class="card-header d-flex justify-content-between">
+            <div>
+              <h5 class="card-title">
+                <span>{{ title.value || 'Title' }}</span>
+              </h5>
+              <h6 class="card-subtitle text-primary-emphasis">{{ subtitle.value || 'Subtitle' }}</h6>
+            </div>
+            <div>
+              @if (favorite.value){
+                <i class="bi bi-heart-fill text-danger"></i>
+              } @else {
+                <i class="bi bi-heart text-danger"></i>
+              }
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ description.value || 'Description' }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-danger">
+                  <i class="bi bi-trash"></i>
+                </button>
+                <button type="button"
+                        class="btn btn-sm btn-outline-secondary">
+                  <i class="bi bi-pencil-fill"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+} @else {
+  <app-loading-spinner/>
+}

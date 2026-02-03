@@ -1,0 +1,110 @@
+@if (loaded) {
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 d-flex mt-3">
+        <div class="input-group mb-3 ms-3">
+          <span class="input-group-text" id="basic-addon1">
+            <i class="bi bi-search"></i>
+          </span>
+          <input type="search" class="form-control"
+                 placeholder="Search" aria-label="Search"
+                 (input)="search($event)">
+        </div>
+      </div>
+    </div>
+    @if (gameList().length === 0) {
+      <h2 class="text-center text-primary">
+        No Games in that search. You can create your own.
+      </h2>
+      <div class="text-center">
+        <button class="btn btn-outline-primary"
+                routerLink="/games/add">Add Game
+        </button>
+      </div>
+
+    } @else {
+      @if (favorites) {
+        <h3>
+          <i class="bi bi-heart-fill text-danger pointer" (click)="favoriteList()"></i>
+        </h3>
+      } @else {
+        <h3>
+          <i class="bi bi-heart text-danger  pointer" (click)="favoriteList()"></i>
+        </h3>
+      }
+      <div class="row">
+        @for (game of gameList(); track game.id) {
+          <div class="col-md-3 my-2">
+            <div class="card shadow-sm flex-grow-1">
+              <img [src]="game.image" [alt]="game.title"
+                   class="card-img-top">
+              <div class="card-header d-flex justify-content-between">
+                <div>
+                  <h5 class="card-title">
+                    <span>{{ game.title }}</span>
+                  </h5>
+                  <h6 class="card-subtitle text-primary-emphasis">{{ game.subtitle }}</h6>
+                </div>
+                <div>
+                  @if (game.favorite) {
+                    <i class="bi bi-heart-fill text-danger" (click)="changeFavorite(game)"></i>
+                  } @else {
+                    <i class="bi bi-heart text-danger" (click)="changeFavorite(game)"></i>
+                  }
+                </div>
+              </div>
+              <div class="card-body">
+                <p class="card-text">{{ game.description }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-danger">
+                      <i class="bi bi-trash"
+                         data-bs-toggle="modal"
+                         [attr.data-bs-target]="'#deleteModal'+game.id"></i>
+                    </button>
+
+                    <!-- MODAL -->
+                    <div class="modal fade"
+                         [attr.id]="'deleteModal'+game.id" tabindex="-1"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header bg-danger">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            Are You sure You want to delete
+                            <span class="text-danger fw-bold">{{ game.title }}</span> ?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Close
+                            </button>
+                            <button type="button" class="btn btn-danger"
+                                    data-bs-dismiss="modal"
+                                    (click)="deleteGame(game.id)">DELETE
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- FIN MODAL -->
+
+
+                    <button type="button" [routerLink]="'/games/edit/'+game.id"
+                            class="btn btn-sm btn-outline-secondary">
+                      <i class="bi bi-pencil-fill"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+} @else {
+  <app-loading-spinner/>
+}
