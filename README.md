@@ -8,20 +8,16 @@ Este proyecto es una aplicación web desarrollada con **Angular** que permite ge
 
 Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
-* 
-**Node.js**: Versión LTS (Long Term Support).
+* **Node.js**: Versión LTS (Long Term Support).
 
 
-* 
-**NPM**: Gestor de paquetes de Node.
+* **NPM**: Gestor de paquetes de Node.
 
 
-* 
-**TypeScript**: Instalación global mediante `npm install -g typescript`.
+* **TypeScript**: Instalación global mediante `npm install -g typescript`.
 
 
-* 
-**Angular CLI**: Instalación global mediante `npm install -g @angular/cli`.
+* **Angular CLI**: Instalación global mediante `npm install -g @angular/cli`.
 
 
 
