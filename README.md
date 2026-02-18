@@ -25,68 +25,31 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
 
 
-## 🚀 Instalación y Configuración
-
-1. **Crear el proyecto**:
-```bash
-ng new frontend
-[cite_start]``` [cite: 9]
-
-
-```
-
-
-2. **Instalar dependencias de estilo**:
-* 
-**Bootstrap**: `ng add @ng-bootstrap/ng-bootstrap`.
-
-
-* 
-**Font Awesome**: `ng add @fortawesome/angular-fontawesome@0.15.0` (seleccionar las 3 librerías Free).
-
-
-
-
-3. **Configurar variables de entorno**:
-Crea la carpeta `src/app/environments/` y define la URL de la API en los archivos `environment.ts` y `environment.prod.ts`:
-```typescript
-urlBase: 'http://localhost:3000/api/v1/games'
-[cite_start]``` [cite: 28, 29]
-
-
-```
-
-
-
 ## 🏗️ Estructura del Proyecto
 
 El proyecto se organiza en los siguientes módulos y componentes principales:
 
 * **Components**:
-* 
-`game-list`: Visualización de la lista de juegos y buscador.
+* `game-list`: Visualización de la lista de juegos y buscador.
 
 
-* 
-`game-edit`: Formulario reactivo para añadir o editar juegos.
+* `game-edit`: Formulario reactivo para añadir o editar juegos.
 
 
-* 
-`navbar` y `footer`: Elementos de navegación y pie de página.
+* `navbar` y `footer`: Elementos de navegación y pie de página.
 
 
 
 
-* 
-**Common**: Interfaces de datos (`Game`, `ApiResponse`).
+* **Common**:
+* Interfaces de datos (`Game`, `ApiResponse`).
 
 
-* 
-**Services**: `GameService` para la comunicación con la API mediante `HttpClient`.
+* **Services**:
+* `GameService` para la comunicación con la API mediante `HttpClient`.
 
 
-* 
-**Validators**: Validaciones personalizadas para formularios.
+* **Validators**: Validaciones personalizadas para formularios.
 
 
 
@@ -102,20 +65,16 @@ Las rutas principales definidas en `app.routes.ts` son:
 
 ### Gestión de Juegos
 
-* 
-**Listado**: Carga automática de juegos desde la API al iniciar el componente.
+* **Listado**: Carga automática de juegos desde la API al iniciar el componente.
 
 
-* 
-**Búsqueda**: Filtrado en tiempo real por título, subtítulo o descripción.
+* **Búsqueda**: Filtrado en tiempo real por título, subtítulo o descripción.
 
 
-* 
-**Favoritos**: Posibilidad de marcar juegos como favoritos y filtrar la lista.
+* **Favoritos**: Posibilidad de marcar juegos como favoritos y filtrar la lista.
 
 
-* 
-**Eliminación**: Borrado de registros con confirmación mediante modal.
+* **Eliminación**: Borrado de registros con confirmación mediante modal.
 
 
 
@@ -130,15 +89,9 @@ La aplicación utiliza **formularios reactivos** con las siguientes validaciones
 
 
 * **Validadores personalizados**:
-* 
-`notOnlyWhiteSpace`: Evita campos que solo contengan espacios.
+* `notOnlyWhiteSpace`: Evita campos que solo contengan espacios.
 
-
-* 
-`forbiddenName`: Prohíbe el uso de palabras específicas (ej. "sexo", "droga") mediante expresiones regulares.
-
-
-
+* `forbiddenName`: Prohíbe el uso de palabras específicas (ej. "sexo", "droga") mediante expresiones regulares.
 
 
 ## 💻 Desarrollo
@@ -150,4 +103,10 @@ ng serve
 
 ```
 
+Para compilar la versión final:
+
+```bash
+ng build
+
+```
 Navega a `http://localhost:4200/`. La aplicación se recargará automáticamente si cambias alguno de los archivos fuente.
